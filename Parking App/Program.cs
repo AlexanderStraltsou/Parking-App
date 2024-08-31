@@ -48,6 +48,7 @@ class Parking
 
 
                 case "3":
+                    RemoveVehicle(parkingGarage);
                     break;
 
                 case "4":
@@ -116,6 +117,94 @@ class Parking
             ShowMenu(parkingGarage);
 
             Console.WriteLine("No Available Spots Left");
+        }
+
+        static void RemoveVehicle(string[] parkingGarage)
+        {
+            
+            ShowParkingSpots(parkingGarage);
+
+            Console.WriteLine("Choose an option to remove a vehicle:");
+            Console.WriteLine("1. By Spot Number");
+            Console.WriteLine("2. By Registration Number");
+            string removeOption = Console.ReadLine();
+
+            switch (removeOption)
+            {
+                case "1":
+                    Console.WriteLine("Enter the Spot Number:");
+                    int spotNumber;
+                    if (int.TryParse(Console.ReadLine(), out spotNumber) && spotNumber > 0 && spotNumber <= parkingGarage.Length)
+                    {
+                        if (parkingGarage[spotNumber - 1] != null)
+                        {
+                            Console.WriteLine($"Removing vehicle from Spot Number {spotNumber}");
+                            parkingGarage[spotNumber - 1] = null;
+                            Console.WriteLine("Press ENTER To Return To The Main Menu");
+                            Console.ReadKey();
+                            Console.WriteLine();
+                            Console.WriteLine();
+                            ShowMenu(parkingGarage);
+                        }
+                        else
+                        {
+                            Console.WriteLine("No vehicle found in this spot.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Spot Number.");
+                    }
+                    break;
+
+                case "2":
+                    Console.WriteLine("Enter the Registration Number:");
+                    string regNumber = Console.ReadLine();
+                    bool vehicleFound = false;
+
+                    for (int i = 0; i < parkingGarage.Length; i++)
+                    {
+                        if (parkingGarage[i] != null && parkingGarage[i].Contains(regNumber))
+                        {
+                            Console.WriteLine($"Removing vehicle with Registration Number {regNumber} from Spot Number {i + 1}");
+                            parkingGarage[i] = null;
+                            vehicleFound = true;
+                            Console.WriteLine("Press ENTER To Return To The Main Menu");
+                            Console.ReadKey();
+                            Console.WriteLine();
+                            Console.WriteLine();
+                            ShowMenu(parkingGarage);
+                            break;
+                        }
+                    }
+
+                    if (!vehicleFound)
+                    {
+                        Console.WriteLine("No vehicle found with this registration number.");
+                    }
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid option.");
+                    Console.WriteLine("Press ENTER To Return To The Main Menu");
+                    Console.ReadKey();
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    ShowMenu(parkingGarage);
+                    break;
+            }
+        }
+
+        static void ShowParkingSpots(string[] parkingGarage)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Current Parking Garage Status:");
+            Console.WriteLine();
+            for (int i = 0; i < parkingGarage.Length; i++)
+            {
+                Console.WriteLine($"Spot {i + 1}: {(parkingGarage[i] != null ? parkingGarage[i] : "Empty")}");
+            }
+            Console.WriteLine();
         }
     }
 
