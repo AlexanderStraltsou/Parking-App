@@ -411,6 +411,7 @@ class Parking
             ShowMenu(parkingGarage);
         }
 
+
         static void FindVehicle(string[] parkingGarage)
         {
 
@@ -482,6 +483,7 @@ class Parking
             Console.WriteLine();
             ShowMenu(parkingGarage);
         }
+
 
 
         static void ShowParkingSpots(string[] parkingGarage)
