@@ -13,7 +13,6 @@ class Parking
 
             ShowMenu(parkingGarage);
 
-
         }
 
         static void ShowMenu(string[] parkingGarage)
@@ -483,7 +482,6 @@ class Parking
             Console.WriteLine();
             ShowMenu(parkingGarage);
         }
-
 
 
         static void ShowParkingSpots(string[] parkingGarage)
